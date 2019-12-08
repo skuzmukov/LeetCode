@@ -7,16 +7,15 @@ class Solution {
         int[] indexes = new int[128];
         Arrays.fill(indexes, -1);
         int start = 0;
+        int index = 0;
         int count = 0;
-        for (int i = 0; i < s.length(); i++) {
-            if (indexes[s.charAt(i)] >= start) {
-                start = indexes[s.charAt(i)] + 1;
-            } else {
-                count = Math.max(count, i - start + 1);
+        for (index = 0; index < s.length(); index++) {
+            if (indexes[s.charAt(index)] >= start) {
+                count = Math.max(count, index - start);
+                start = indexes[s.charAt(index)] + 1;
             }
-            indexes[s.charAt(i)] = i;
+            indexes[s.charAt(index)] = index;
         }
-
-        return count;
+        return Math.max(count, index - start);
     }
 }
