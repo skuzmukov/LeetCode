@@ -1,4 +1,4 @@
-package arrays.Solution_912;
+package arrays.Task_912;
 
 import java.util.ArrayList;
 import java.util.List;
