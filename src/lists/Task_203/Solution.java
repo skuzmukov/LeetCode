@@ -7,14 +7,11 @@ public class Solution {
         ListNode fake = new ListNode(-1);
         fake.next = head;
         ListNode current = fake;
-        ListNode next = fake.next;
         while(current.next != null) {
-            if (next.val == val) {
-                    current.next = next.next;
-                    next = current.next;
+            if (current.next.val == val) {
+                    current.next = current.next.next;
             } else {
-                current = next;
-                next = next.next;
+                current = current.next;
             }
         }
         return fake.next;
