@@ -1,11 +1,7 @@
 package lists.Task_209;
 
+import utils.ListNode;
 
-class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int x) { val = x; }
-}
 class Solution {
     public ListNode reverseList(ListNode head) {
         if (head == null) {return null;}
@@ -17,6 +13,18 @@ class Solution {
             x.next = newHead;
             newHead = x;
             temp = temp.next;
+        }
+        return newHead;
+    }
+
+    public ListNode reverseList1(ListNode head) {
+        ListNode temp = head;
+        ListNode newHead = null;
+        while (temp != null) {
+            ListNode x = temp.next;
+            temp.next = newHead;
+            newHead = temp;
+            temp = x;
         }
         return newHead;
     }

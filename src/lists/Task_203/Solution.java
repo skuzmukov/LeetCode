@@ -9,7 +9,7 @@ public class Solution {
         ListNode current = fake;
         while(current.next != null) {
             if (current.next.val == val) {
-                    current.next = current.next.next;
+                current.next = current.next.next;
             } else {
                 current = current.next;
             }
