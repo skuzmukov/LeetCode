@@ -1,44 +1,37 @@
 package arrays.Task_349;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 public class Solution {
     public int[] intersection(int[] nums1, int[] nums2) {
-        int maxF = Integer.MIN_VALUE;
-        int minF = Integer.MAX_VALUE;
-        for (int i : nums1) {
-            maxF = Math.max(i, maxF);
-            minF = Math.min(i, minF);
+        if (nums1 == null || nums1.length == 0 || nums2 == null || nums2.length == 0) { return new int[] {}; }
+        if (nums1.length < nums2.length) {
+            return arr(nums1, nums2);
+        } else {
+            return arr(nums2, nums1);
         }
-        boolean[] f = new boolean[maxF - minF + 1];
-        for (int i : nums1) {
-            f[i - minF] = true;
-        }
-        // use one min and one max for two arrays 
-        int maxS = Integer.MIN_VALUE;
-        int minS = Integer.MAX_VALUE;
+    }
 
-        for (int i : nums2) {
-            maxS = Math.max(i, maxS);
-            minS = Math.min(i, minS);
-        }
-        boolean[] s = new boolean[maxS - minS + 1];
-
-        for (int i : nums2) {
-            s[i - minS] = true;
-        }
-        List<Integer> res = new ArrayList<>();
-        for (int i = 0; i < s.length; i++) {
-            if (s[i] && i + minS - minF >= 0 && i + minS - minF < f.length && f[i + minS - minF]) {
-                res.add(i + minS);
+    int[] arr(int[] nums1, int[] nums2) {
+        int[] res = new int[nums1.length];
+        int max = Integer.MIN_VALUE;
+        for (int i : nums1) {
+            if (max < i) {
+                max = i;
             }
         }
-        // Array.copyOf()
-        int[] arr = new int[res.size()];
-        for (int i = 0; i < res.size(); i++) {
-            arr[i] = res.get(i);
+        boolean[] arr = new boolean[max + 1];
+        for (int i : nums1) {
+            arr[i] = true;
         }
-        return arr;
+        int ind = 0;
+        int len = arr.length;
+        for (int i : nums2) {
+            if (i < len && arr[i]) {
+                res[ind++] = i;
+                arr[i] = false;
+            }
+        }
+        return Arrays.copyOf(res, ind);
     }
 }
