@@ -3,16 +3,14 @@ package dynamic.Task_303;
 class NumArray {
     private int[] arr;
     public NumArray(int[] nums) {
-        arr = new int[nums.length];
-        int sum = 0;
-        for (int i = 0; i < arr.length; i++) {
-            sum += nums[i];
-            arr[i] = sum;
+        arr = new int[nums.length + 1];
+        for (int i = 0; i < arr.length - 1; i++) {
+            arr[i + 1] = nums[i] + arr[i];
         }
     }
 
     public int sumRange(int i, int j) {
-        return i == 0 ? arr[j] : arr[j] - arr[i - 1];
+        return arr[j + 1] - arr[i];
     }
 }
 
