@@ -4,6 +4,25 @@ import java.util.Arrays;
 
 public class Solution {
     public int[] smallerNumbersThanCurrent(int[] nums) {
+        int[] counted = new int[101];
+        for (int i : nums) {
+            counted[i] ++;
+        }
+        int sumBefore = 0;
+        int temp;
+        for (int i = 0; i < counted.length; i++) {
+            temp = counted[i];
+            counted[i] = sumBefore;
+            sumBefore += temp;
+        }
+        int[] res = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            res[i] = counted[nums[i]];
+        }
+        return res;
+    }
+
+/*    public int[] smallerNumbersThanCurrent(int[] nums) {
         int[] sorted = new int[nums.length];
         System.arraycopy(nums, 0, sorted, 0, nums.length);
         Arrays.sort(sorted);
@@ -14,6 +33,7 @@ public class Solution {
             res[i] = index;
         }
         return res;
+
     }
 
     private int binarySearch(int[] arr, int key) {
@@ -33,6 +53,6 @@ public class Solution {
             }
         }
         return -1;
-    }
+    }*/
 }
 
