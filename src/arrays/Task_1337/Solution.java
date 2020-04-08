@@ -34,4 +34,28 @@ public class Solution {
         }
         return h;
     }
+
+    /*
+    public int[] kWeakestRows(int[][] mat, int k) {
+        int[][] res = new int[mat.length][2];
+        int ind = 0;
+        for (int i = 0; i < mat.length; i++) {
+            res[ind++] = new int[] {i, count(mat[i])};
+        }
+        Arrays.sort(res, Comparator.comparingInt(value -> value[1]));
+        int[] arr = new int[k];
+        for (int i = 0; i < k; i++) {
+            arr[i] = res[i][0];
+        }
+        return arr;
+    }
+
+    private int count(int[] arr) {
+        int count = 0;
+        for (int i : arr) {
+            count+= i;
+        }
+        return count;
+    }
+    * */
 }
