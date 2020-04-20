@@ -10,12 +10,12 @@ public class Solution {
         int h = (int) Math.pow(2, nums.length) + 1;
         int t = (int) Math.pow(2, nums.length + 1);
         String mask;
-        for (int i = h; i < t; i++) {
+        for (int num = h; num < t; num++) {
             List<Integer> list = new ArrayList<>();
-            mask = Integer.toBinaryString(i);
-            for (int ind = 1; ind < mask.length(); ind++) {
-                if (mask.charAt(ind) == '1') {
-                    list.add(nums[ind - 1]);
+            mask = Integer.toBinaryString(num);
+            for (int i = 1; i < mask.length(); i++) {
+                if (mask.charAt(i) == '1') {
+                    list.add(nums[i - 1]);
                 }
             }
             res.add(list);
