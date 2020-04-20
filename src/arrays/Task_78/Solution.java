@@ -9,12 +9,12 @@ public class Solution {
         res.add(new ArrayList<>());
         int h = (int) Math.pow(2, nums.length) + 1;
         int t = (int) Math.pow(2, nums.length + 1);
-        String curr;
+        String mask;
         for (int i = h; i < t; i++) {
             List<Integer> list = new ArrayList<>();
-            curr = Integer.toBinaryString(i);
-            for (int ind = 1; ind < curr.length(); ind++) {
-                if (curr.charAt(ind) == '1') {
+            mask = Integer.toBinaryString(i);
+            for (int ind = 1; ind < mask.length(); ind++) {
+                if (mask.charAt(ind) == '1') {
                     list.add(nums[ind - 1]);
                 }
             }
