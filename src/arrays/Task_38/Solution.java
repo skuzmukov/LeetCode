@@ -26,4 +26,30 @@ public class Solution {
         }
         return s;
     }
+    
+    public String countAndSay1(int n) {
+        String s = "1";
+        StringBuilder stringBuilder = new StringBuilder();
+        int counter = 1;
+        char curr;
+        int count;
+        while (counter < n) {
+            curr = s.charAt(0);
+            count = 1;
+            for (int i = 1; i < s.length(); i++) {
+                if (s.charAt(i) == curr) {
+                    count++;
+                } else {
+                    stringBuilder.append(count).append(curr);
+                    count = 1;
+                    curr = s.charAt(i);
+                }
+            }
+            stringBuilder.append(count).append(curr);
+            s = stringBuilder.toString();
+            stringBuilder.setLength(0);
+            counter ++;
+        }
+        return s;
+    }
 }
