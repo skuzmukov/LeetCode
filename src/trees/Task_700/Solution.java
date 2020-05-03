@@ -4,17 +4,17 @@ import utils.TreeNode;
 
 public class Solution {
     public TreeNode searchBST(TreeNode root, int val) {
-        TreeNode temp = root;
-        while (temp != null) {
-            if (temp.val == val) {
-                return temp;
-            }
-            if (temp.val > val) {
-                temp = temp.left;
-            } else {
-                temp = temp.right;
-            }
+        return search(root, val);
+    }
+
+    TreeNode search(TreeNode node, int val) {
+        if (node == null || node.val == val) {
+            return node;
         }
-        return null;
+        if (node.val < val) {
+            return search(node.right, val);
+        } else {
+            return search(node.left, val);
+        }
     }
 }
