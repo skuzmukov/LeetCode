@@ -1,14 +1,19 @@
 package arrays.Task_70;
 
+import java.util.HashMap;
+import java.util.Map;
+
+//https://leetcode.com/problems/climbing-stairs/
 public class Solution {
+    Map<Integer, Integer> cache = new HashMap<>();
     public int climbStairs(int n) {
-        if (n == 1) {return 1;}
-        int[] stairs = new int[n];
-        stairs[0] = 1;
-        stairs[1] = 2;
-        for (int i = 2; i < stairs.length; i++) {
-            stairs[i] = stairs[i - 1] + stairs[i - 2];
+        if (cache.containsKey(n)) {
+            return cache.get(n);
         }
-        return stairs[stairs.length - 1];
+        if (n < 3) { return n; }
+        int res = climbStairs(n - 1) + climbStairs(n - 2);
+        cache.put(n, res);
+
+        return res;
     }
 }
