@@ -1,20 +1,20 @@
 package math.Task_509;
+
+import java.util.HashMap;
+import java.util.Map;
 //https://leetcode.com/problems/fibonacci-number/
 public class Solution {
+    Map<Integer, Integer> cache = new HashMap<>();
     public int fib(int N) {
-        int prev = 1;
-        int curr = 0;
-        int temp = 0;
-        while (N-- > 0) {
-            temp = curr + prev;
-            prev = curr;
-            curr = temp;
+        if (cache.containsKey(N)) {
+            return cache.get(N);
         }
-        return curr;
+        if (N < 2) {
+            return N;
+        }
+        int n = fib(N - 1) + fib(N - 2);
+        cache.put(N, n);
+
+        return n;
     }
 }
-
-/*
-Runtime: 0 ms, faster than 100.00% of Java online submissions for Fibonacci Number.
-Memory Usage: 36 MB, less than 5.51% of Java online submissions for Fibonacci Number.
-*/
