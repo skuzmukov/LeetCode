@@ -4,25 +4,22 @@ import java.util.*;
 //https://leetcode.com/problems/find-all-anagrams-in-a-string/
 public class Solution {
     public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> res = new ArrayList<>();
+        if (s.length() < p.length()) { return res; }
         char[] pArr = new char[27];
+        char[] sArr = new char[27];
         for (int i = 0; i < p.length(); i++) {
             pArr[p.charAt(i) - 'a'] ++;
+            sArr[s.charAt(i) - 'a'] ++;
         }
-        Set<Integer> res = new HashSet<>();
-        for (int pInd = 0; pInd < p.length(); pInd++) {
-            for (int i = 0; i < s.length() - p.length() + 1; i++) {
-                if (p.charAt(pInd) == s.charAt(i)) {
-                    char[] sArr = new char[27];
-                    for (int x = i; x < i + p.length(); x++) {
-                        sArr[s.charAt(x) - 'a'] ++;
-                    }
-                    if (Arrays.equals(sArr, pArr)) {
-                        res.add(i);
-                    }
-                }
-            }
+        for (int i = p.length(); i < s.length(); i++) {
+            if (Arrays.equals(pArr, sArr)) { res.add(i - p.length()); }
+            sArr[s.charAt(i - p.length()) - 'a'] --; // NB!
+            sArr[s.charAt(i) - 'a'] ++;
         }
-        return new ArrayList<>(res);
+        if (Arrays.equals(pArr, sArr)) { res.add(s.length() - p.length()); }
+        return res;
     }
 }
-// TLE 33/36 accepted
+
+// sliding window/ created with help
