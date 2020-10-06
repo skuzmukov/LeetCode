@@ -1,27 +1,36 @@
 package trees.Task_701;
 
 import utils.TreeNode;
-
+//https://leetcode.com/problems/insert-into-a-binary-search-tree/
 public class Solution {
     public TreeNode insertIntoBST(TreeNode root, int val) {
-        TreeNode temp = root;
-        while (temp != null) {
-            if (temp.val < val) {
-                if (temp.right == null) {
-                    temp.right = new TreeNode(val);
-                    return root;
-                } else {
-                    temp = temp.right;
-                }
-            } else {
-                if (temp.left == null) {
-                    temp.left = new TreeNode(val);
-                    return root;
-                } else {
-                    temp = temp.left;
-                }
-            }
+        if (root == null) {
+            return new TreeNode(val);
         }
-        return new TreeNode(val);
+        insert(root, val);
+        return root;
+    }
+
+    private void insert(TreeNode root, int val) {
+        boolean isLeft = root.val > val;
+        if (isLeft && root.left == null) {
+            root.left = new TreeNode(val);
+            return;
+        }
+        if (!isLeft && root.right == null) {
+            root.right = new TreeNode(val);
+            return;
+        }
+        if (isLeft) {
+            insert(root.left, val);
+        } else {
+            insert(root.right, val);
+        }
     }
 }
+
+/*
+*
+* Вставка в бинарное дерево нового значения
+*
+* */
