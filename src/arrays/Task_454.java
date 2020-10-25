@@ -7,33 +7,44 @@ import java.util.Map;
 public class Task_454 {
     public int fourSumCount(int[] A, int[] B, int[] C, int[] D) {
         int res = 0;
-        res += count(sumOfElements(A, B), sumOfElements(C, D));
-        return res;
-    }
-
-    private Map<Integer, Integer> sumOfElements(int[] A, int[] B) {
         Map<Integer, Integer> map = new HashMap<>(2 * A.length + 1);
         int sum = 0;
         int count = 0;
-        for (int i = 0; i < A.length; i ++) {
-            for (int j = 0; j < B.length; j++) {
-                sum = A[i] + B[j];
+
+        Integer rest = null;
+
+        for (int value : A) {
+            for (int i : B) {
+                sum = value + i;
                 count = map.getOrDefault(sum, 0) + 1;
                 map.put(sum, count);
             }
         }
-        return map;
-    }
 
-    private int count(Map<Integer, Integer> A, Map<Integer, Integer> B) {
-        int res = 0;
-        int key = 0;
-        for (Map.Entry<Integer, Integer> entry : A.entrySet()) {
-            key = (-1) * entry.getKey();
-            if (B.containsKey(key)) {
-                res += entry.getValue() * B.get(key);
+        for (int value : C) {
+            for (int i : D) {
+                sum = (-1) * (value + i);
+                rest = map.get(sum);
+                if (rest != null) {
+                    res += rest;
+                }
             }
         }
         return res;
     }
 }
+
+/*
+*
+Input:
+A = [ 1, 2]
+B = [-2,-1]
+C = [-1, 2]
+D = [ 0, 2]
+
+Output:
+2
+* Бежим по первому и второму массиву и ищем попарную сумму элементов, результат записываем в map, где ключ - сумму элементов, а значение - количество таких сумм
+* Бежим по третьему и четвертому массиву и ищем попарную сумму элементов, после чего ищем эту сумму как ключ в map со знаком -, это означает, что сумма всех 4 элементов равна 0
+* к результату прибавляем количество таких сумм из map
+* */
