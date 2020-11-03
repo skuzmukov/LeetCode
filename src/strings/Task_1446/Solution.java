@@ -1,19 +1,48 @@
 package strings.Task_1446;
 //https://leetcode.com/problems/consecutive-characters/
+
+
 public class Solution {
     public int maxPower(String s) {
-        int power = 1;
-        int curr = 1;
-        char c = 0;
-        for (char x : s.toCharArray()) {
-            if (c != x) {
-                power = Math.max(power, curr);
-                curr = 1;
-                c = x;
-            } else {
-                curr ++;
+        int[] abc = new int[32];
+
+        int count = 0;
+        int c;
+        int i = 0;
+
+        int ind = 0;
+        while (i < s.length()) {
+            c = s.charAt(i);
+            while (i < s.length() && s.charAt(i) == c) {
+                count ++;
+                i++;
+            }
+            ind = c - 'a';
+            if (abc[ind] < count) {
+                abc[ind] = count;
+            }
+            count = 0;
+        }
+
+        int max = 0;
+        for (int val : abc) {
+            if (val > max) {
+                max = val;
             }
         }
-        return power;
+
+        return max;
     }
 }
+
+
+/*
+*
+* Определяем массив длины 32 под алфавит - каждый индекс равен индексу буквы в алфавите.
+* Приравниваем символ c текущему в строке, если равны - добавляем в count ++ и переставляем на следующий символ в строке
+* Иначе если текущий count больше чем значение в abc - перезаписываем значение
+*
+*
+* Возвращаем max элемент из abc.
+*
+* */
