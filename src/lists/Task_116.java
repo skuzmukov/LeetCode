@@ -1,37 +1,24 @@
 package lists;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 //https://leetcode.com/problems/populating-next-right-pointers-in-each-node/
-public class Task_116  {
+public class Task_116 {
     public Node connect(Node root) {
-        if (root == null || root.left == null) { return root; }
-        Queue<Node> queue = new LinkedList<>();
-        int counter = 2;
-        queue.add(root.left);
-        queue.add(root.right);
-        int i;
+        if (root == null) { return null; }
+        Node current = root;
         Node temp;
-        while (!queue.isEmpty()) {
-            i = 1;
-            while (!queue.isEmpty() && i < counter) {
-                temp = queue.poll();
-                temp.next = queue.peek();
 
-                if (temp.left != null) {
-                    queue.add(temp.left);
-                    queue.add(temp.right);
+        while (current.left != null) {
+            temp = current;
+            while (temp != null) {
+                temp.left.next = temp.right;
+                if (temp.next != null) {
+                    temp.right.next = temp.next.left;
                 }
-                i++;
+                temp = temp.next;
             }
-            temp = queue.poll();
-            if (temp != null && temp.left != null) {
-                queue.add(temp.left);
-                queue.add(temp.right);
-            }
-            counter *= 2;
+            current = current.left;
         }
+
         return root;
     }
 }
