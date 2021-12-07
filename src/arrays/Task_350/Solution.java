@@ -1,38 +1,24 @@
 package arrays.Task_350;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Solution {
     public int[] intersect(int[] nums1, int[] nums2) {
-        if (nums1 == null || nums1.length == 0 || nums2 == null || nums2.length == 0)  { return new int[] {}; }
-        if (nums1.length < nums2.length) {
-            return arr(nums1, nums2);
-        } else {
-            return arr(nums2, nums1);
-        }
-    }
-
-    public int[] arr(int[] nums1, int[] nums2) {
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-
+        int[] sorted = new int[1001];
         for (int i : nums1) {
-            map.put(i, map.getOrDefault(i, 0) + 1);
+            sorted[i]++;
         }
-
-        int[] res = new int[nums1.length];
-        int ind = 0;
-        Integer val = 0;
-
+        List<Integer> intersect = new ArrayList<>();
         for (int i : nums2) {
-            val = map.get(i);
-            if (val != null && val.intValue() > 0) {
-                res[ind++] = i;
-                map.put(i, val.intValue() - 1);
+            if (sorted[i]-- > 0) {
+                intersect.add(i);
             }
         }
+        int[] result = new int[intersect.size()];
+        for (int i = 0; i < intersect.size(); i++) {
+            result[i] = intersect.get(i);
+        }
 
-        return Arrays.copyOf(res, ind);
+        return result;
     }
 }
