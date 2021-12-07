@@ -1,15 +1,21 @@
 package arrays.Task_977;
 
-import java.util.Arrays;
 
 public class Solution {
-    public int[] sortedSquares(int[] A) {
-        int[] res = new int[A.length];
-        int x = 0;
-        for (int i : A) {
-            res[x++] = i * i;
+    public int[] sortedSquares(int[] nums) {
+        int[] result = new int[nums.length];
+        int h = 0;
+        int t = nums.length - 1;
+        int index = nums.length - 1;
+        while (h <= t) {
+            if (Math.abs(nums[h]) > nums[t]) {
+                result[index--] = nums[h] * nums[h];
+                h ++;
+            } else {
+                result[index--] = nums[t] * nums[t];
+                t --;
+            }
         }
-        Arrays.sort(res);
-        return res;
+        return result;
     }
 }
